@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit PPV</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<body>
+<form action="#" th:action="@{/PPV-update}" th:Object="${PPV}" method="Post">
+    <ul class="unmarked">
+        <li>
+            <input hidden readonly type="number" th:field="*{id}" id="id" placeholder="ID" class="rounded">
+            <label for="name"></label>
+            <input type="text" th:field="*{name}" id="name" placeholder="name" class="rounded">
+        </li>
+        <li>
+            <label for="date"></label>
+            <input type="date" th:field="*{date}" id="date" placeholder="date">
+        </li>
+        <li><input type="submit" value="Update PPV"></li>
+        <div><a th:href="@{/ppvs}" id= "go_home">Back to PPVs </a></div>
+    </ul>
+</form>
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/ppvform.js}"></script>
+</body>
+</html>

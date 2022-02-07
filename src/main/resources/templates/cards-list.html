@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>CardPositions</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<body>
+<div th:switch="${cards}">
+    <h2 th:case="null">No CardPositions found!</h2>
+    <div th:case="*">
+        <h2>CardPositions</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>PPV_id</th>
+                <th>NumberInShow</th>
+                <th>Length</th>
+                <th>TitleName</th>
+                <th>Winner</th>
+                <th class = "links_header" colspan="3"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="card : ${cards}">
+                <td th:Text="${card.id}"></td>
+                <td th:Text="${ref_id}"></td>
+                <td th:Text="${card.numberinshow}"></td>
+                <td th:Text="${card.Length}"></td>
+                <td th:Text="${card.titlename}"></td>
+                <td th:Text="${card.Winner}"></td>
+                <td class="links"> <a th:href="@{card-update/{id}(id=${card.id})}">Edit</a></td>
+                <td class="links"> <a th:href="@{card-delete/{id}(id=${card.id})}">Delete</a></td>
+                <td class="links"> <a th:href="@{fighters_{id}(id=${card.id})}" th:object="${card}">Go to Fighters</a></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="links_bottom"><a th:href="@{card-create_{id}(id=${ref_id})}">Create CardPosition </a></div>
+    <div class="links_bottom" id="go_home"><a th:href="@{/ppvs}">Back to PPVs </a></div>
+</div>
+</body>
+</html>

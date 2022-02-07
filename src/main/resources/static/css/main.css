@@ -1,0 +1,88 @@
+ body {
+     background-color: #eeeeee;
+ }
+
+h2 {
+     width: 100%;
+     text-align: center;
+     font-style: oblique;
+ }
+
+.table{
+    border: 1px solid #eee;
+    table-layout: auto;
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+.table th {
+    font-weight: bold;
+    padding: 5px;
+    background: #efefef;
+    border: 1px solid #dddddd;
+}
+.table th.links_header {
+    font-weight: bold;
+    padding: 5px;
+    background: #ccc;
+    border: 1px solid #dddddd;
+    width: min-content;
+}
+.table td{
+    padding: 5px 10px;
+    border: 1px solid #eee;
+    text-align: left;
+}
+.table tbody tr:nth-child(odd){
+    background: #fff;
+}
+.table tbody tr:nth-child(even){
+    background: #F7F7F7;
+}
+
+.table tbody tr td.links{
+    text-align: center;
+    border: 0px;
+    width: min-content;
+}
+
+.table tbody tr:nth-child(even) .links {
+    background-color: #abab;
+}
+
+.table tbody tr:nth-child(odd) .links {
+    background-color: #baba;
+}
+
+.links_bottom {
+    width: 100%;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.links_bottom a{
+    background: linear-gradient(to top left, #F6EFD2, #CEAD78);
+    padding: 3px;
+    width: fit-content;
+    align-content: center;
+    position: absolute;
+    left: 50%;
+    text-decoration: none;
+}
+
+ input {
+     padding: 10px;
+     margin: 10px 0;
+ }
+ input.rounded {
+     border-radius: 10px;
+ }
+
+ input[readonly] {
+     background-color: gray;
+ }
+
+ .unmarked {
+     list-style: none;
+ }
+

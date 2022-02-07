@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit CardPostion</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<body>
+<form action="#" th:action="@{/fighter-update_{id}(id=${ref_id})}" method="Post">
+    <ul class="unmarked">
+        <li><label for="ref_id">Card_Id(read_only):</label>
+            <input readonly type="number" th:value="${ref_id}" id="ref_id" placeholder="Card_id" class="rounded">
+        </li>
+        <input readonly hidden id="id" th:value="${fighter.id}" name="id">
+        <li>
+            <label for="firstname">FirstName:</label>
+            <input type="text" th:field="${fighter.firstname}" id="firstname" placeholder="FirstName" name="firstname" class="rounded">
+        </li>
+        <li>
+            <label for="secondname">SecondName:</label>
+            <input type="text" th:field="${fighter.secondname}" id="secondname" placeholder="SecondName" name="secondname" class="rounded">
+        </li>
+        <li>
+            <label for="Nationality">Nationality:</label>
+            <input type="text" th:field="${fighter.Nationality}" id="Nationality" placeholder="Nationality" name="Nationality" class="rounded">
+        </li>
+        <li>
+            <label for="Age">Age:</label>
+            <input type="number" th:value="${fighter.Age}" id="Age"
+                   placeholder="Age" name="Age" class="rounded" min = "0">
+        </li>
+        <li><input type="submit" value="Edit Fighter"></li>
+        <li>
+            <div><a th:href="@{/fighters_{id}(id=${ref_id})}" id= "go_home">Back to Fighters </a></div>
+        </li>
+    </ul>
+</form>
+<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/fighterform.js}"></script>
+</body>
+</html>

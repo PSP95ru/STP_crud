@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>PPVs</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<body>
+<div th:switch="${PPVs}">
+    <h2 th:case="null">No PPVs found!</h2>
+    <div th:case="*">
+        <h2>PPVs</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th class = "links_header" colspan="3"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="PPV : ${PPVs}">
+                <td th:Text="${PPV.id}"></td>
+                <td th:Text="${PPV.Name}"></td>
+                <td th:Text="${PPV.Date}"></td>
+                <td class="links"> <a th:href="@{PPV-update/{id}(id=${PPV.id})}">Edit</a></td>
+                <td class="links"> <a th:href="@{PPV-delete/{id}(id=${PPV.id})}">Delete</a></td>
+                <td class="links"> <a th:href="@{cards_{id}(id=${PPV.id})}" th:object="${PPV}">Go to CardPositions</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="links_bottom"><a th:href="@{/PPV-create}">Create PPV</a></div>
+</div>
+</body>
+</html>

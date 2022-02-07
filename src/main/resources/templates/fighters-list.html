@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Fighters</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<body>
+<div th:switch="${fighters}">
+    <h2 th:case="null">No Fighters found!</h2>
+    <div th:case="*">
+        <h2>Fighters</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Card_id</th>
+                <th>FirstName</th>
+                <th>SecondName</th>
+                <th>Nationality</th>
+                <th>Age</th>
+                <th class = "links_header" colspan="2"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="fighter : ${fighters}">
+                <td th:Text="${fighter.id}"></td>
+                <td th:Text="${ref_id}"></td>
+                <td th:Text="${fighter.firstname}"></td>
+                <td th:Text="${fighter.secondname}"></td>
+                <td th:Text="${fighter.Nationality}"></td>
+                <td th:Text="${fighter.age}"></td>
+                <td class="links"> <a th:href="@{fighter-update/{id}(id=${fighter.id})}">Edit</a></td>
+                <td class="links"> <a th:href="@{fighter-delete/{id}(id=${fighter.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="links_bottom"><a th:href="@{fighter-create_{id}(id=${ref_id})}">Create Fighter </a></div>
+    <div class="links_bottom"><a th:href="@{cards_{id}(id=${ppv_id})}">Back to Cards </a></div>
+    <div class="links_bottom"><a th:href="@{ppvs}">Back to PPVs </a></div>
+</div>
+</body>
+</html>
