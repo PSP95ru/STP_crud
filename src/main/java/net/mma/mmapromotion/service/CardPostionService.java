@@ -35,7 +35,7 @@ public class CardPostionService {
         cardPostionRepository.deleteById(id);
     }
 
-    public List<CardPostion> findByPpv_idAndNumberinshowAndIdIsNot(Long ppv_id, int number, Long id){
-        return cardPostionRepository.findByPpv_idAndNumberinshowAndIdIsNot(ppv_id, number, id);
+    public List<CardPostion> findByPpv_idAndNumberInShowAndIdIsNot(Long ppv_id, int number, Long id){
+        return cardPostionRepository.findByPpv_idAndNumberInShowAndIdIsNot(ppv_id, number, id);
     }
 }

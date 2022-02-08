@@ -16,15 +16,15 @@ public class CardPostion {
     @JoinColumn(name = "PPV_id")
     private PPV ppv;
     @Column(name = "number_in_show")
-    private int numberinshow;
+    private int numberInShow;
     @Column(name = "Length")
     private int length;
     @Column(name = "title_name")
-    private String titlename;
+    private String titleName;
     @Column(name = "Winner")
     private String winner;
 
-    @OneToMany(mappedBy = "cardpostion", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cardPostion", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Fighter> fighters;
 
     @Override
@@ -42,6 +42,6 @@ public class CardPostion {
     @Override
     public String toString() {
         return id.toString() + ppv.getId().toString() +
-                numberinshow + length + titlename + winner;
+                numberInShow + length + titleName + winner;
     }
 }

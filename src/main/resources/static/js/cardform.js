@@ -11,21 +11,21 @@ $(document).ready(function () {
 
 function ajax_submit() {
 
-    var cardform = {};
-    cardform.numberinshow = $("#Numberinshow").val();
-    cardform.length = $("#Length").val();
-    cardform.titlename = $("#Titlename").val();
-    cardform.winner = $("#Winner").val();
-    cardform.id = null;
+    var cardForm = {};
+    cardForm.numberInShow = $("#numberInShow").val();
+    cardForm.length = $("#length").val();
+    cardForm.titleName = $("#titleName").val();
+    cardForm.winner = $("#winner").val();
+    cardForm.id = null;
     if ($("#id").val() != null) {
-        cardform.id = $("#id").val();
+        cardForm.id = $("#id").val();
     }
 
     $.ajax({
         type: "POST",
         contentType: "application/json",
         url: $('form').prop('action'),
-        data: JSON.stringify(cardform),
+        data: JSON.stringify(cardForm),
         dataType: 'json',
         cache: false,
         timeout: 600000,

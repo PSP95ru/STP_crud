@@ -22,8 +22,8 @@
             <tbody>
             <tr th:each="PPV : ${PPVs}">
                 <td th:Text="${PPV.id}"></td>
-                <td th:Text="${PPV.Name}"></td>
-                <td th:Text="${PPV.Date}"></td>
+                <td th:Text="${PPV.name}"></td>
+                <td th:Text="${PPV.date}"></td>
                 <td class="links"> <a th:href="@{PPV-update/{id}(id=${PPV.id})}">Edit</a></td>
                 <td class="links"> <a th:href="@{PPV-delete/{id}(id=${PPV.id})}">Delete</a></td>
                 <td class="links"> <a th:href="@{cards_{id}(id=${PPV.id})}" th:object="${PPV}">Go to CardPositions</a></td>

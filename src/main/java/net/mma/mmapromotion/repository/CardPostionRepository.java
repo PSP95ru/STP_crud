@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface CardPostionRepository extends JpaRepository<CardPostion, Long> {
     List<CardPostion> findByppv_id(Long id);
-    List<CardPostion> findByPpv_idAndNumberinshowAndIdIsNot(Long ppv_id, int number, Long id);
+    List<CardPostion> findByPpv_idAndNumberInShowAndIdIsNot(Long ppv_id, int number, Long id);
 }
 

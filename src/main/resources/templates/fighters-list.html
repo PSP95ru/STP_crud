@@ -25,10 +25,10 @@
             <tbody>
             <tr th:each="fighter : ${fighters}">
                 <td th:Text="${fighter.id}"></td>
-                <td th:Text="${ref_id}"></td>
-                <td th:Text="${fighter.firstname}"></td>
-                <td th:Text="${fighter.secondname}"></td>
-                <td th:Text="${fighter.Nationality}"></td>
+                <td th:Text="${refId}"></td>
+                <td th:Text="${fighter.firstName}"></td>
+                <td th:Text="${fighter.secondName}"></td>
+                <td th:Text="${fighter.nationality}"></td>
                 <td th:Text="${fighter.age}"></td>
                 <td class="links"> <a th:href="@{fighter-update/{id}(id=${fighter.id})}">Edit</a></td>
                 <td class="links"> <a th:href="@{fighter-delete/{id}(id=${fighter.id})}">Delete</a></td>
@@ -36,8 +36,8 @@
             </tbody>
         </table>
     </div>
-    <div class="links_bottom"><a th:href="@{fighter-create_{id}(id=${ref_id})}">Create Fighter </a></div>
-    <div class="links_bottom"><a th:href="@{cards_{id}(id=${ppv_id})}">Back to Cards </a></div>
+    <div class="links_bottom"><a th:href="@{fighter-create_{id}(id=${refId})}">Create Fighter </a></div>
+    <div class="links_bottom"><a th:href="@{cards_{id}(id=${ppvId})}">Back to Cards </a></div>
     <div class="links_bottom"><a th:href="@{ppvs}">Back to PPVs </a></div>
 </div>
 </body>

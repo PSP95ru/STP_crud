@@ -25,7 +25,7 @@ public class FighterService {
     }
 
     public List<Fighter> findAllRelated(long id) {
-        return fighterRepository.findBycardpostion_id(id);
+        return fighterRepository.findByCardPostion_id(id);
     }
 
     public Fighter saveFighter (Fighter cardPostion) {
@@ -36,8 +36,8 @@ public class FighterService {
         fighterRepository.deleteById(id);
     }
 
-    public List<Fighter> findByFirstnameAndSecondnameAndCardpostion_IdIsNot(String fname, String sname, Long id){
-        return  fighterRepository.findByFirstnameAndSecondnameAndCardpostion_IdIsNot(fname, sname, id);
+    public List<Fighter> findByFirstNameAndSecondNameAndCardPostion_IdIsNot(String fname, String sname, Long id){
+        return  fighterRepository.findByFirstNameAndSecondNameAndCardPostion_IdIsNot(fname, sname, id);
     }
 
 }
