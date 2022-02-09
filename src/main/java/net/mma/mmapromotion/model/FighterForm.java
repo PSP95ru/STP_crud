@@ -7,8 +7,8 @@ import javax.persistence.Column;
 @Data
 public class FighterForm {
     private Long id;
-    private String firstname;
-    private String secondname;
-    private String Nationality;
+    private String firstName;
+    private String secondName;
+    private String nationality;
     private int age;
 }

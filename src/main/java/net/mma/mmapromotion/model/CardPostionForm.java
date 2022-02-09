@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class CardPostionForm {
     private Long id;
-    private int numberinshow;
+    private int numberInShow;
     private int length;
-    private String titlename;
+    private String titleName;
     private String winner;
 }

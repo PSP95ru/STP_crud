@@ -12,10 +12,10 @@ $(document).ready(function () {
 function ajax_submit() {
 
     var fighterform = {};
-    fighterform.firstname = $("#firstname").val();
-    fighterform.secondname = $("#secondname").val();
-    fighterform.nationality = $("#Nationality").val();
-    fighterform.age = $("#Age").val();
+    fighterform.firstName = $("#firstName").val();
+    fighterform.secondName = $("#secondName").val();
+    fighterform.nationality = $("#nationality").val();
+    fighterform.age = $("#age").val();
     fighterform.id = null;
     if ($("#id").val() != null) {
         fighterform.id = $("#id").val();

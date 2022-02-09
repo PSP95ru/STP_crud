@@ -13,13 +13,13 @@ public class Fighter {
     private Long id;
     @ManyToOne(targetEntity = CardPostion.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "Card_id")
-    private CardPostion cardpostion;
+    private CardPostion cardPostion;
     @Column(name = "first_name")
-    private String firstname;
+    private String firstName;
     @Column(name = "second_name")
-    private String secondname;
+    private String secondName;
     @Column(name = "Nationality")
-    private String Nationality;
+    private String nationality;
     @Column(name = "Age")
     private int age;
 
@@ -37,7 +37,7 @@ public class Fighter {
 
     @Override
     public String toString() {
-        return id.toString() + cardpostion.getId().toString() +
-                firstname + secondname + Nationality + age;
+        return id.toString() + cardPostion.getId().toString() +
+                firstName + secondName + nationality + age;
     }
 }

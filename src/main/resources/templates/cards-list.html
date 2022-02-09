@@ -25,11 +25,11 @@
             <tbody>
             <tr th:each="card : ${cards}">
                 <td th:Text="${card.id}"></td>
-                <td th:Text="${ref_id}"></td>
-                <td th:Text="${card.numberinshow}"></td>
-                <td th:Text="${card.Length}"></td>
-                <td th:Text="${card.titlename}"></td>
-                <td th:Text="${card.Winner}"></td>
+                <td th:Text="${refId}"></td>
+                <td th:Text="${card.numberInShow}"></td>
+                <td th:Text="${card.length}"></td>
+                <td th:Text="${card.titleName}"></td>
+                <td th:Text="${card.winner}"></td>
                 <td class="links"> <a th:href="@{card-update/{id}(id=${card.id})}">Edit</a></td>
                 <td class="links"> <a th:href="@{card-delete/{id}(id=${card.id})}">Delete</a></td>
                 <td class="links"> <a th:href="@{fighters_{id}(id=${card.id})}" th:object="${card}">Go to Fighters</a></td>
@@ -38,7 +38,7 @@
             </tbody>
         </table>
     </div>
-    <div class="links_bottom"><a th:href="@{card-create_{id}(id=${ref_id})}">Create CardPosition </a></div>
+    <div class="links_bottom"><a th:href="@{card-create_{id}(id=${refId})}">Create CardPosition </a></div>
     <div class="links_bottom" id="go_home"><a th:href="@{/ppvs}">Back to PPVs </a></div>
 </div>
 </body>

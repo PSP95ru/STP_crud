@@ -66,26 +66,26 @@ public class AppController {
         response.setResult(0);
         response.setMsg("Check was successful. You are not supposed to see this message.");
         //response.setNextAddr("redirect:/ppvs");
-        PPV formppv = new PPV();
-        formppv.setId(formContent.getId());
-        Long finder_id = formppv.getId();
-        if (finder_id == null) {
-            finder_id = -1L;
+        PPV formPpv = new PPV();
+        formPpv.setId(formContent.getId());
+        Long finderId = formPpv.getId();
+        if (finderId == null) {
+            finderId = -1L;
         } else {
-            formppv = ppvService.findById(finder_id);
+            formPpv = ppvService.findById(finderId);
         }
-        formppv.setDate(formContent.getDate());
-        formppv.setName(formContent.getName());
-        if (formppv.getName() == null || formppv.getName().length() < 1){
+        formPpv.setDate(formContent.getDate());
+        formPpv.setName(formContent.getName());
+        if (formPpv.getName() == null || formPpv.getName().length() < 1){
             response.setMsg("Unsuccessful! Name should not be empty!");
             response.setResult(1);
         } else {
-            List<PPV> ppvs = ppvService.findByNameAndIdIsNot(formppv.getName(), finder_id);
+            List<PPV> ppvs = ppvService.findByNameAndIdIsNot(formPpv.getName(), finderId);
             if (ppvs != null && ppvs.size() > 0) {
                 response.setMsg("Unsuccessful! This name is already used by another entry!");
                 response.setResult(1);
             } else {
-                ppvService.savePPV(formppv);
+                ppvService.savePPV(formPpv);
             }
         }
         return ResponseEntity.ok(response);
@@ -112,34 +112,34 @@ public class AppController {
      */
 
 
-    @GetMapping("/cards_{ppv_id}")
-    public String findAllRelatedCards(Model model, @PathVariable("ppv_id") Long ppv_id) {
-        List<CardPostion> cards = cardPostionService.findAllRelated(ppv_id);
+    @GetMapping("/cards_{ppvId}")
+    public String findAllRelatedCards(Model model, @PathVariable("ppvId") Long ppvId) {
+        List<CardPostion> cards = cardPostionService.findAllRelated(ppvId);
         model.addAttribute("cards", cards);
-        model.addAttribute("ref_id", ppv_id);
+        model.addAttribute("refId", ppvId);
         return "cards-list";
     }
 
-    @GetMapping("/card-create_{ppv_id}")
-    public String createCardPostionForm(Model model, CardPostion cardPostion, @PathVariable("ppv_id") Long ppv_id) {
-        model.addAttribute("ref_id", ppv_id);
-        cardPostion.setPpv(ppvService.findById(ppv_id));
+    @GetMapping("/card-create_{ppvId}")
+    public String createCardPostionForm(Model model, CardPostion cardPostion, @PathVariable("ppvId") Long ppvId) {
+        model.addAttribute("refId", ppvId);
+        cardPostion.setPpv(ppvService.findById(ppvId));
         return "card-create";
     }
 
     /*
-    @PostMapping("/card-create_{ppv_id}")
-    public String createCardPostion(Model model, CardPostion cardPostion, @PathVariable("ppv_id") Long ppv_id) {
-        cardPostion.setPpv(ppvService.findById(ppv_id));
+    @PostMapping("/card-create_{ppvId}")
+    public String createCardPostion(Model model, CardPostion cardPostion, @PathVariable("ppvId") Long ppvId) {
+        cardPostion.setPpv(ppvService.findById(ppvId));
         cardPostionService.saveCardPostion(cardPostion);
         return "redirect:/cards_" + cardPostion.getPpv().getId();
     }
      */
 
     @ResponseBody
-    @PostMapping(value ={"/card-create_{ppv_id}", "/card-update_{ppv_id}"})
+    @PostMapping(value ={"/card-create_{ppvId}", "/card-update_{ppvId}"})
     public ResponseEntity<?> createOrUpdateCardPostion(@RequestBody CardPostionForm formContent, Errors errors,
-                                                       @PathVariable("ppv_id") Long ppv_id) {
+                                                       @PathVariable("ppvId") Long ppvId) {
         AjaxResponseBody response = new AjaxResponseBody();
         if (errors.hasErrors()) {
             response.setMsg(errors.getAllErrors()
@@ -149,41 +149,41 @@ public class AppController {
         }
         response.setResult(0);
         response.setMsg("Check was successful. You are not supposed to see this message.");
-        //response.setNextAddr("/cards_" + ppv_id);
-        CardPostion formcard = new CardPostion();
-        formcard.setId(formContent.getId());
-        Long finder_id = formcard.getId();
-        if (finder_id == null) {
-            finder_id = -1L;
-            formcard.setPpv(ppvService.findById(ppv_id));
+        //response.setNextAddr("/cards_" + ppvId);
+        CardPostion formCard = new CardPostion();
+        formCard.setId(formContent.getId());
+        Long finderId = formCard.getId();
+        if (finderId == null) {
+            finderId = -1L;
+            formCard.setPpv(ppvService.findById(ppvId));
         } else {
-            formcard = cardPostionService.findById(finder_id);
+            formCard = cardPostionService.findById(finderId);
         }
-        formcard.setNumberinshow(formContent.getNumberinshow());
-        formcard.setLength(formContent.getLength());
-        formcard.setTitlename(formContent.getTitlename());
-        formcard.setWinner(formContent.getWinner());
-        if (formcard.getTitlename() == null || formcard.getTitlename().length() < 1){
+        formCard.setNumberInShow(formContent.getNumberInShow());
+        formCard.setLength(formContent.getLength());
+        formCard.setTitleName(formContent.getTitleName());
+        formCard.setWinner(formContent.getWinner());
+        if (formCard.getTitleName() == null || formCard.getTitleName().length() < 1){
             response.setMsg("Unsuccessful! Title name should not be empty!");
             response.setResult(1);
         }
-        else if (formcard.getWinner() == null || formcard.getWinner().length() < 1){
+        else if (formCard.getWinner() == null || formCard.getWinner().length() < 1){
             response.setMsg("Unsuccessful! Winner should not be empty!");
             response.setResult(1);
         }
-        else if (formcard.getNumberinshow() < 1){
+        else if (formCard.getNumberInShow() < 1){
             response.setMsg("Unsuccessful! Number in show should be positive!");
             response.setResult(1);
-        } else if (formcard.getLength() < 1){
+        } else if (formCard.getLength() < 1){
             response.setMsg("Unsuccessful! Length should be positive!");
             response.setResult(1);
         } else {
-            List<CardPostion> cards = cardPostionService.findByPpv_idAndNumberinshowAndIdIsNot(ppv_id, formcard.getNumberinshow(), finder_id);
+            List<CardPostion> cards = cardPostionService.findByPpv_idAndNumberInShowAndIdIsNot(ppvId, formCard.getNumberInShow(), finderId);
             if (cards != null && cards.size() > 0) {
                 response.setMsg("Unsuccessful! Two entries cannot be designated the same number during one show!");
                 response.setResult(1);
             } else {
-                cardPostionService.saveCardPostion(formcard);
+                cardPostionService.saveCardPostion(formCard);
             }
         }
         return ResponseEntity.ok(response);
@@ -191,53 +191,53 @@ public class AppController {
 
     @GetMapping("/card-delete/{id}")
     public String deleteCardPostion(@PathVariable("id") Long id) {
-        Long ppv_id = cardPostionService.findById(id).getPpv().getId();
+        Long ppvId = cardPostionService.findById(id).getPpv().getId();
         cardPostionService.deleteById(id);
-        return "redirect:/cards_" + ppv_id;
+        return "redirect:/cards_" + ppvId;
     }
 
     @GetMapping("/card-update/{id}")
     public String updateCardPostionForm(Model model, @PathVariable("id") Long id) {
         CardPostion cardPostion = cardPostionService.findById(id);
         PPV ppv = cardPostion.getPpv();
-        model.addAttribute("ref_id", ppv.getId());
+        model.addAttribute("refId", ppv.getId());
         model.addAttribute("cardPostion", cardPostion);
         return "card-update";
     }
 
     /*
-    @PostMapping("/card-update_{ppv_id}")
-    public String updateCardPostion(Model model, CardPostion cardPostion, @PathVariable("ppv_id") Long ppv_id) {
+    @PostMapping("/card-update_{ppvId}")
+    public String updateCardPostion(Model model, CardPostion cardPostion, @PathVariable("ppvId") Long ppvId) {
         CardPostion result = cardPostionService.findById(cardPostion.getId());
         result.setLength(cardPostion.getLength());
-        result.setNumberinshow(cardPostion.getNumberinshow());
+        result.setNumberInShow(cardPostion.getNumberInShow());
         result.setWinner(cardPostion.getWinner());
-        result.setTitle_name(cardPostion.getTitle_name());
+        result.setTitleName(cardPostion.getTitleName());
         cardPostionService.saveCardPostion(result);
         return "redirect:/cards_" + result.getPpv().getId();
     }
     */
 
-    @GetMapping("/fighters_{card_id}")
-    public String findAllRelatedFighters(Model model, @PathVariable("card_id") Long card_id) {
-        List<Fighter> fighters = fighterService.findAllRelated(card_id);
+    @GetMapping("/fighters_{cardId}")
+    public String findAllRelatedFighters(Model model, @PathVariable("cardId") Long cardId) {
+        List<Fighter> fighters = fighterService.findAllRelated(cardId);
         model.addAttribute("fighters", fighters);
-        model.addAttribute("ref_id", card_id);
-        model.addAttribute("ppv_id", cardPostionService.findById(card_id).getPpv().getId());
+        model.addAttribute("refId", cardId);
+        model.addAttribute("ppvId", cardPostionService.findById(cardId).getPpv().getId());
         return "fighters-list";
     }
 
-    @GetMapping("/fighter-create_{card_id}")
-    public String createFighterForm(Model model, Fighter fighter, @PathVariable("card_id") Long card_id) {
-        model.addAttribute("ref_id", card_id);
-        fighter.setCardpostion(cardPostionService.findById(card_id));
+    @GetMapping("/fighter-create_{cardId}")
+    public String createFighterForm(Model model, Fighter fighter, @PathVariable("cardId") Long cardId) {
+        model.addAttribute("refId", cardId);
+        fighter.setCardPostion(cardPostionService.findById(cardId));
         return "fighter-create";
     }
 
     @ResponseBody
-    @PostMapping(value ={"/fighter-create_{card_id}", "/fighter-update_{card_id}"})
+    @PostMapping(value ={"/fighter-create_{cardId}", "/fighter-update_{cardId}"})
     public ResponseEntity<?> createOrUpdateFighter(@RequestBody FighterForm formContent, Errors errors,
-                                                       @PathVariable("card_id") Long card_id) {
+                                                       @PathVariable("cardId") Long cardId) {
         AjaxResponseBody response = new AjaxResponseBody();
         if (errors.hasErrors()) {
             response.setMsg(errors.getAllErrors()
@@ -247,42 +247,42 @@ public class AppController {
         }
         response.setResult(0);
         response.setMsg("Check was successful. You are not supposed to see this message.");
-        //response.setNextAddr("/fighters_" + card_id);
-        Fighter formfighter = new Fighter();
-        formfighter.setId(formContent.getId());
-        Long finder_id = formfighter.getId();
-        if (finder_id == null) {
-            finder_id = -1L;
-            formfighter.setCardpostion(cardPostionService.findById(card_id));
+        //response.setNextAddr("/fighters_" + cardId);
+        Fighter formFighter = new Fighter();
+        formFighter.setId(formContent.getId());
+        Long finderId = formFighter.getId();
+        if (finderId == null) {
+            finderId = -1L;
+            formFighter.setCardPostion(cardPostionService.findById(cardId));
         } else {
-            formfighter = fighterService.findById(finder_id);
+            formFighter = fighterService.findById(finderId);
         }
-        formfighter.setFirstname(formContent.getFirstname());
-        formfighter.setSecondname(formContent.getSecondname());
-        formfighter.setNationality(formContent.getNationality());
-        formfighter.setAge(formContent.getAge());
-        if (formfighter.getFirstname() == null || formfighter.getFirstname().length() < 1){
+        formFighter.setFirstName(formContent.getFirstName());
+        formFighter.setSecondName(formContent.getSecondName());
+        formFighter.setNationality(formContent.getNationality());
+        formFighter.setAge(formContent.getAge());
+        if (formFighter.getFirstName() == null || formFighter.getFirstName().length() < 1){
             response.setMsg("Unsuccessful! Names should not be empty!");
             response.setResult(1);
         }
-        else if (formfighter.getSecondname() == null || formfighter.getSecondname().length() < 1){
+        else if (formFighter.getSecondName() == null || formFighter.getSecondName().length() < 1){
             response.setMsg("Unsuccessful! Names should not be empty!");
             response.setResult(1);
         }
-        else if (formfighter.getNationality() == null || formfighter.getNationality().length() < 1){
+        else if (formFighter.getNationality() == null || formFighter.getNationality().length() < 1){
             response.setMsg("Unsuccessful! Nationality should not be empty!");
             response.setResult(1);
-        } else if (formfighter.getAge() < 1){
+        } else if (formFighter.getAge() < 1){
             response.setMsg("Unsuccessful! Age should be positive!");
             response.setResult(1);
         } else {
-            List<Fighter> fighters = fighterService.findByFirstnameAndSecondnameAndCardpostion_IdIsNot(formfighter.getFirstname(),
-                    formfighter.getSecondname(), finder_id);
+            List<Fighter> fighters = fighterService.findByFirstNameAndSecondNameAndCardPostion_IdIsNot(formFighter.getFirstName(),
+                    formFighter.getSecondName(), finderId);
             if (fighters != null && fighters.size() > 0) {
                 response.setMsg("Unsuccessful! Same fighter cannot be mentioned twice in one match!");
                 response.setResult(1);
             } else {
-                fighterService.saveFighter(formfighter);
+                fighterService.saveFighter(formFighter);
             }
         }
         return ResponseEntity.ok(response);
@@ -290,36 +290,36 @@ public class AppController {
 
 
     /*
-    @PostMapping("/fighter-create_{card_id}")
-    public String createFighter(Model model, Fighter fighter, @PathVariable("card_id") Long card_id) {
-        fighter.setCardpostion(cardPostionService.findById(card_id));
+    @PostMapping("/fighter-create_{cardId}")
+    public String createFighter(Model model, Fighter fighter, @PathVariable("cardId") Long cardId) {
+        fighter.setCardPostion(cardPostionService.findById(cardId));
         fighterService.saveFighter(fighter);
-        return "redirect:/fighters_" + fighter.getCardpostion().getId();
+        return "redirect:/fighters_" + fighter.getCardPostion().getId();
     }
      */
 
     @GetMapping("/fighter-delete/{id}")
     public String deleteFighter(@PathVariable("id") Long id) {
-        Long card_id = fighterService.findById(id).getCardpostion().getId();
+        Long cardId = fighterService.findById(id).getCardPostion().getId();
         fighterService.deleteById(id);
-        return "redirect:/fighters_" + card_id;
+        return "redirect:/fighters_" + cardId;
     }
 
     @GetMapping("/fighter-update/{id}")
     public String updateFighterForm(Model model, @PathVariable("id") Long id) {
         Fighter fighter = fighterService.findById(id);
-        CardPostion card = fighter.getCardpostion();
-        model.addAttribute("ref_id", card.getId());
+        CardPostion card = fighter.getCardPostion();
+        model.addAttribute("refId", card.getId());
         model.addAttribute("fighter", fighter);
         return "fighter-update";
     }
 
     /*
-    @PostMapping("/fighter-update_{card_id}")
-    public String updateFighter(Model model, Fighter fighter, @PathVariable("card_id") Long card_id) {
-        fighter.setCardpostion(cardPostionService.findById(card_id));
+    @PostMapping("/fighter-update_{cardId}")
+    public String updateFighter(Model model, Fighter fighter, @PathVariable("cardId") Long cardId) {
+        fighter.setCardPostion(cardPostionService.findById(cardId));
         fighterService.saveFighter(fighter);
-        return "redirect:/fighters_" + fighter.getCardpostion().getId();
+        return "redirect:/fighters_" + fighter.getCardPostion().getId();
     }
      */
 }

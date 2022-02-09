@@ -6,28 +6,30 @@
     <link rel="stylesheet" th:href="@{/css/main.css}" />
 </head>
 <body>
-<form action="#" th:action="@{/card-create_{id}(id=${ref_id})}" method="Post">
+<form action="#" th:action="@{/card-create_{id}(id=${refId})}" method="Post">
     <ul class="unmarked">
-        <li><label for="ref_id">PPV_Id(read_only):</label>
-            <input readonly type="number" th:value="${ref_id}" id="ref_id" placeholder="PPV_id" class="rounded">
-        </li> <input readonly hidden th:value="${ref_id}" name="ref_id">
-        <li><label for="Numberinshow">Number in show:</label>
-            <input type="number" th:field="${cardPostion.numberinshow}" id="Numberinshow"
-                   placeholder="Number in show" name="numberinshow" class="rounded" min = "0">
+        <li><label for="refId">PPV Id(read_only):</label>
+            <input readonly type="number" th:value="${refId}" id="refId" placeholder="PPV id" class="rounded">
         </li>
-        <li><label for="Length">Length:</label>
-            <input type="number" th:value="${cardPostion.Length}" id="Length"
-                   placeholder="Length" name = "Length" class="rounded"  min = "0">
+        <li><label for="numberInShow">Number in show:</label>
+            <input type="number" th:field="${cardPostion.numberInShow}" id="numberInShow"
+                   placeholder="Number in show" name="numberInShow" class="rounded" min = "0">
         </li>
-        <li><label for="Titlename">Title name</label>
-            <input type="text" th:value="${cardPostion.titlename}" id="Titlename" placeholder="Title name" name="titlename" class="rounded">
+        <li><label for="length">Length:</label>
+            <input type="number" th:field="${cardPostion.length}" id="length"
+                   placeholder="Length" name = "length" class="rounded"  min = "0">
         </li>
-        <li><label for="Winner">Winner:</label>
-            <input type="text" th:value="${cardPostion.Winner}" id="Winner" placeholder="Winner" name="Winner" class="rounded">
+        <li><label for="titleName">Title name</label>
+            <input type="text" th:field="${cardPostion.titleName}" id="titleName"
+                   placeholder="Title name" name="titleName" class="rounded">
+        </li>
+        <li><label for="winner">Winner:</label>
+            <input type="text" th:field="${cardPostion.winner}" id="winner"
+                   placeholder="winner" name="winner" class="rounded">
         </li>
         <li><input type="submit" value="Create New cardPostion"></li>
         <li>
-            <div><a th:href="@{/cards_{id}(id=${ref_id})}" id="go_home">Back to CardPostions </a></div>
+            <div><a th:href="@{/cards_{id}(id=${refId})}" id="go_home">Back to CardPostions </a></div>
         </li>
     </ul>
 </form>

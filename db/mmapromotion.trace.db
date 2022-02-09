@@ -1,0 +1,4 @@
+2022-02-08 17:33:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "PPV" не найдена
+Table "PPV" not found; SQL statement:
+select ppv0_.id as id1_2_, ppv0_.date as date2_2_, ppv0_.name as name3_2_ from ppv ppv0_ [42102-200]

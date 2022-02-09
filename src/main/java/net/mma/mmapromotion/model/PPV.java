@@ -19,7 +19,7 @@ public class PPV {
     private String name;
     @Column(name = "Date")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date Date;
+    private Date date;
     @OneToMany(mappedBy = "ppv", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CardPostion> cards;
 
@@ -38,6 +38,6 @@ public class PPV {
 
     @Override
     public String toString() {
-        return id.toString() + name.toString() + Date.toString();
+        return id.toString() + name.toString() + date.toString();
     }
 }
